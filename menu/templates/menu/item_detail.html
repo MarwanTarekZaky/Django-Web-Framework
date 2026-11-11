@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% load menu_extras %}
 
 {% block title %}{{ item.name }} | The Little Bistro{% endblock %}
 
 {% block content %}
     <h1>{{ item.name }}</h1>
     <p>Category: {{ item.category.name|default:"Uncategorized" }}</p>
-    <p class="price">${{ item.price }}</p>
+    <p class="price">{{ item.price|currency }}</p>
     <p>{{ item.description|default:"No description yet." }}</p>
     <p><small>Added on {{ item.created_at|date:"F j, Y" }}</small></p>
 

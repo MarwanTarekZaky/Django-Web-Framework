@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load menu_extras %}
 
 {% block title %}Menu | {{ restaurant_name }}{% endblock %}
 
@@ -7,18 +8,13 @@
     <h2>Our menu ({{ items|length }} items)</h2>
 
     <ul>
-        {% for item in items %}
+        {% for item in items %}   
             <li>
                 <a href="{% url 'menu:item_detail' item.pk %}">{{ item.name }}</a>
-                <li>
-                    <a href="{% url 'menu:item_detail' item.pk %}">{{ item.name }}</a>
-                    {% if item.category %}
-                        <em>({{ item.category.name }})</em>
-                    {% endif %}
-                    <span class="price">${{ item.price }}</span>
-                </li>
-
-                <span class="price">${{ item.price }}</span>
+                {% if item.category %}
+                    <em>({{ item.category.name }})</em>
+                {% endif %}
+                <span class="price">${{ item.price|currency }}</span>
             </li>
         {% empty %}
             <li>The menu is empty. Add some items in the admin.</li>
