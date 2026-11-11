@@ -4,7 +4,8 @@ from .models import MenuItem
 
 
 def home(request):
-    items = MenuItem.objects.filter(is_available=True)
+    items = MenuItem.objects.filter(is_available=True).select_related("category")
+
     context = {
         "restaurant_name": "The Little Bistro",
         "items": items,
