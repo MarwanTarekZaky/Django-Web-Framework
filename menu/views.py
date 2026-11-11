@@ -1,6 +1,4 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.utils.html import escape
 
 
 def home(request):
@@ -13,5 +11,4 @@ def home(request):
 
 
 def hello(request, name):
-    return HttpResponse(f"Hello, {escape(name)}!")  # Security for XSS(cross-site scripting)
-
+    return render(request, "menu/hello.html", {"name": name})

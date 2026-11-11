@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ restaurant_name }}</title>
-</head>
-<body>
-    <h1> {{ restaurant_name|upper }}</h1>
+{% extends "base.html" %}
+
+{% block title %}Home | {{ restaurant_name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ restaurant_name|upper }}</h1>
 
     {% if is_open %}
         <p>We are open today!</p>
@@ -16,12 +14,9 @@
     <h2>Today's specials ({{ specials|length }})</h2>
     <ul>
         {% for special in specials %}
-            <li>{{ forloop.counter }}. {{ special }}
+            <li>{{ forloop.counter }}. {{ special }}</li>
         {% empty %}
             <li>No specials today.</li>
         {% endfor %}
     </ul>
-
-    {# This is a template comment. The browser never sees it. #}
-</body>
-</html>
+{% endblock %}
