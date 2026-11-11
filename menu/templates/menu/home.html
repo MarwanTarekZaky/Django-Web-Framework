@@ -1,22 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}Home | {{ restaurant_name }}{% endblock %}
+{% block title %}Menu | {{ restaurant_name }}{% endblock %}
 
 {% block content %}
-    <h1>{{ restaurant_name|upper }}</h1>
+    <h1>{{ restaurant_name }}</h1>
+    <h2>Our menu ({{ items|length }} items)</h2>
 
-    {% if is_open %}
-        <p>We are open today!</p>
-    {% else %}
-        <p>Sorry, we are closed today.</p>
-    {% endif %}
-
-    <h2>Today's specials ({{ specials|length }})</h2>
     <ul>
-        {% for special in specials %}
-            <li>{{ forloop.counter }}. {{ special }}</li>
+        {% for item in items %}
+            <li>
+                <a href="{% url 'menu:item_detail' item.pk %}">{{ item.name }}</a>
+                <span class="price">${{ item.price }}</span>
+            </li>
         {% empty %}
-            <li>No specials today.</li>
+            <li>The menu is empty. Add some items in the admin.</li>
         {% endfor %}
     </ul>
 {% endblock %}
